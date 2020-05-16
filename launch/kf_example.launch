@@ -1,0 +1,25 @@
+<!-- 
+    Master on Robotics : Unmanned Aerial Robots 
+
+    Simple KF estimator 
+
+  --> 
+<launch>
+
+    <rosparam command="load" file="$(find kf_exercise)/cfg/simple_kf.yaml" />
+    
+    <node name="rosbag_player" pkg="rosbag" type="play" output="screen" args="--clock $(find kf_exercise)/bags/exp1.bag"/> >
+
+
+    <node name="estimator" pkg="kf_exercise" type="estimator_node" clear_params="true" output="screen">
+
+       <remap from="/imu" to="/firefly/imu" />  
+       <remap from="/gps" to="/firefly/fake_gps/pose_with_covariance" />
+       <remap from="/odom_filtered" to="/firefly/odom_filtered" />
+
+    </node>
+
+    <node name="plotJuggler_vis" pkg="plotjuggler" type="PlotJuggler" args="--layout $(find kf_exercise)/cfg/PlotJuggler_config.xml"/> >
+
+
+</launch>

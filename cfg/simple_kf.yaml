@@ -1,0 +1,6 @@
+# KF parameters
+
+estimation:
+  gps_covariance: 0.001
+  process_covariance: 0.5
+  initial_error_covariance: 0.1
